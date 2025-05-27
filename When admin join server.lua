@@ -1,3 +1,4 @@
+
 local allowedPlaces = {
     [2753915549] = true,
     [7449423635] = true,
