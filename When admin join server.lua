@@ -12,22 +12,31 @@ end
 local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local player = Players.LocalPlayer
+local Notification = require(ReplicatedStorage.Notification)
 
--- ลูปตรวจสอบว่าเลือกทีมแล้วหรือยัง
+-- ลูปตรวจสอบว่าเลือกทีมแล้วหรือยัง (แสดงเตือนครั้งเดียว)
 task.spawn(function()
+    local shownWarning = false
+
     while player.Team == nil do
-        print("setteam")
-        -- หรือจะใส่คำสั่งเปลี่ยนทีมอัตโนมัติก็ได้ เช่น:
-        -- ReplicatedStorage.Remotes.CommF_:InvokeServer("SetTeam", "Pirates")
-        task.wait(1)
+        if not shownWarning then
+            Notification.new("<Color=White> Choose Some team for Anti Banned active! <Color=/>"):Display()
+            shownWarning = true
+        end
+        task.wait(1.5)
     end
 
     -- เมื่อเลือกทีมแล้ว แสดง Notification
-    local Notification = require(ReplicatedStorage.Notification)
     Notification.new("<Color=White> Inject Script<Color=/> <Color=Red> Bitchh! <Color=/>"):Display()
-   task.wait(2.5)
-    local Notification = require(ReplicatedStorage.Notification)
-    Notification.new("<Color=White> Anti Banned forme admins <Color=/> <Color=Green>Active! <Color=/>"):Display()
+    wait(1)
+    Notification.new("<Color=White> It may take 2 - 17 seconds.<Color=/>"):Display()
+    task.wait(2.5)
+
+    -- แสดง Anti Banned Active แบบสุ่มเวลา (2 - 17 วิ)
+    local duration = math.random(2, 17)
+    local notif = Notification.new("<Color=White> Anti Banned forme admins <Color=/> <Color=Green>Active! <Color=/>")
+    notif:Display()
+    task.wait(duration)
 end)
 
 -- รายชื่อ blacklist
@@ -45,13 +54,15 @@ local blacklist = {
 local function checkPlayers()
     for _, p in ipairs(Players:GetPlayers()) do
         if blacklist[p.Name] then
+            Notification.new("<Color=Yellow> The Admin " .. p.Name .. " Has Joined the servers!!<Color=/>"):Display()
+            task.wait(1.9)
             game:Shutdown()
             break
         end
     end
 end
 
--- ลูปเช็คชื่อทุก 2.5 วินาที
+-- ลูปเช็คชื่อทุก 1.5 วินาที
 task.spawn(function()
     while true do
         checkPlayers()
