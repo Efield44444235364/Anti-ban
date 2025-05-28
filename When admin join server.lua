@@ -149,6 +149,3 @@ Players.LocalPlayer.Idled:connect(function()
 end)
 
 warn("Anti AFK Active")
-
-warm("Blacklist : mygame43, Uzoth, xonae, Onett, Uzi_London, rip_indra, ShafiDev")
-warm("It Active")
