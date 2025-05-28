@@ -80,8 +80,6 @@ LocalPlayer.Idled:Connect(function()
     wait(1)
     VirtualUser:Button2Up(Vector2.new(0, 0), workspace.CurrentCamera.CFrame)
 end)
-
-notify("Anti-Kick", "✅ Anti-Kick & Anti-AFK Loaded Safely")
 warn("Anti-Kick Active")
 warn("Anti AFK Active")
 
@@ -99,15 +97,12 @@ task.spawn(function()
     task.wait(1)
     Notification.new("<Color=White>It may take <Color=Yellow>2 - 17<Color=/> seconds.<Color=/>"):Display()
     task.wait(2.5)
-
-    if getgenv().ED_AntiKick and getgenv().ED_AntiKick.Enabled then
         task.wait(3)
         warn("testing anti kick")
         Notification.new("<Color=White>Testing Anti-kick<Color=/>"):Display()
         LocalPlayer:Kick("Testing anti kick bypass!!!")
         task.wait(0.5)
         Notification.new("<Color=White> Anti Kick protection<Color=/> <Color=Green> Active!<Color=/>"):Display()
-    end
 
     local duration = math.random(2, 17)
     Notification.new("<Color=White>Anti Banned from admins <Color=/> <Color=Green>Active!<Color=/>"):Display()
@@ -145,3 +140,4 @@ task.spawn(function()
 end)
 
 game:GetService('TestService'):Message("The Anti-Ban and kick is in a test version\nyou maybe get banned from system\n(Blox fruit Only)")
+warn("Anti-Kick & Anti-AFK Loaded Safely")
