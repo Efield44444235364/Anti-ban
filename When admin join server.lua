@@ -35,7 +35,7 @@ task.spawn(function()
 
     -- แสดง Anti Banned Active แบบสุ่มเวลา (2 - 17 วิ)
     local duration = math.random(2, 17)
-    local notif = Notification.new("<Color=White> Anti Banned forme admins <Color=/> <Color=Green>Active! <Color=/>"):Display()
+    local notif = Notification.new("<Color=White> Anti Banned from admins <Color=/> <Color=Green>Active! <Color=/>"):Display()
     notif:Display()
     task.wait(duration)
 end)
@@ -70,3 +70,13 @@ task.spawn(function()
         task.wait(1.5)
     end
 end)
+
+
+-- Anti-AFK by Kawnew (Safe + Normal)
+local VirtualUser = game:service("VirtualUser")
+game:service("Players").LocalPlayer.Idled:connect(function()
+    VirtualUser:Button2Down(Vector2.new(0,0), workspace.CurrentCamera.CFrame)
+    task.wait(1)
+    VirtualUser:Button2Up(Vector2.new(0,0), workspace.CurrentCamera.CFrame)
+end)
+warm("Anti AFK Active")
