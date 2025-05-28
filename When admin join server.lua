@@ -41,6 +41,7 @@ mt.__namecall = newcclosure(function(self, ...)
     if typeof(self) == "Instance" and type(method) == "string" then
         if self == LocalPlayer and method:lower() == "kick" then
             notify("Anti-Kick", "Blocked Kick (namecall)")
+          Notification.new("Blocked Anti kick: name call"):Display()
             return nil
         end
         if (method == "FireServer" or method == "InvokeServer") and self:IsA("RemoteEvent") then
@@ -68,7 +69,7 @@ end
 local oldIndex
 oldIndex = hookmetamethod(game, "__index", newcclosure(function(self, key)
     if self == LocalPlayer and key:lower() == "kick" then
-        Notification.new("<Color=Green>You Execute This Script (Anti kick) before \n Script is ready in loaded!<Color=/>"):Display()
+        Notification.new("<Color=Green>You Execute This Script (Anti kick and Admins bypass) before \n Script is ready in loaded!<Color=/>"):Display()
         return function() end
     end
     return oldIndex(self, key)
