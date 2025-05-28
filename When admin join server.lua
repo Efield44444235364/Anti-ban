@@ -95,7 +95,7 @@ task.spawn(function()
     -- ✅ แสดง Notification Anti-Kick ถ้าเปิดใช้งานอยู่
     if getgenv().ED_AntiKick and getgenv().ED_AntiKick.Enabled then
             task.wait(3)
-        Notification.new("<Color=Yellow>Anti-Kick protection <Color=Green>Enabled!<Color=/>"):Display()
+        Notification.new("<Color=Yellow> Anti Kick protection<Color=/> <Color=Green> Active!<Color=/>"):Display()
     end
 
     -- Anti-Banned active
