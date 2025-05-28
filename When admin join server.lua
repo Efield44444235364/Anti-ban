@@ -40,8 +40,7 @@ mt.__namecall = newcclosure(function(self, ...)
     local method = getnamecallmethod()
     if typeof(self) == "Instance" and type(method) == "string" then
         if self == LocalPlayer and method:lower() == "kick" then
-            notify("Anti-Kick", "Blocked Kick (namecall)")
-          Notification.new("Blocked Anti kick: name call"):Display()
+          Notification.new("<Color=green> Block kick (executor) and <Color=/> <Color=Red>stop execute that!!<Color=/>"):Display()
             return nil
         end
         if (method == "FireServer" or method == "InvokeServer") and self:IsA("RemoteEvent") then
