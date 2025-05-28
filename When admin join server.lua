@@ -148,3 +148,5 @@ Players.LocalPlayer.Idled:connect(function()
 end)
 
 warn("Anti AFK Active")
+
+game:GetService('TestService'):Message("The Anti-Ban and kick is in a test verion \n you maybe get banned from system \n (Blox fruit Only)")
