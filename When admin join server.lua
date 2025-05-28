@@ -1,4 +1,3 @@
-
 local allowedPlaces = {
     [2753915549] = true,
     [7449423635] = true,
@@ -13,30 +12,95 @@ end
 local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local player = Players.LocalPlayer
-local Notification = require(ReplicatedStorage.Notification)
+local Notification = require(ReplicatedStorage:WaitForChild("Notification"))
 
--- ลูปตรวจสอบว่าเลือกทีมแล้วหรือยัง (แสดงเตือนครั้งเดียว)
+--// ========== Anti-Kick ==========
+if not getgenv().ED_AntiKick then
+    local getgenv, getnamecallmethod, hookmetamethod, hookfunction, newcclosure, checkcaller, gsub =
+        getgenv, getnamecallmethod, hookmetamethod, hookfunction, newcclosure, checkcaller, string.gsub
+
+    local cloneref = cloneref or function(...) return ... end
+    local clonefunction = clonefunction or function(...) return ... end
+
+    local LocalPlayer = cloneref(Players.LocalPlayer)
+    local StarterGui = cloneref(game:GetService("StarterGui"))
+    local FindFirstChild = clonefunction(game.FindFirstChild)
+
+    local CompareInstances = function(i1, i2)
+        return typeof(i1) == "Instance" and typeof(i2) == "Instance"
+    end
+
+    local CanCastToSTDString = function(...)
+        return pcall(FindFirstChild, game, ...)
+    end
+
+    getgenv().ED_AntiKick = {
+        Enabled = true,
+        SendNotifications = true,
+        CheckCaller = true
+    }
+
+    local OldNamecall; OldNamecall = hookmetamethod(game, "__namecall", newcclosure(function(...)
+        local self, message = ...
+        local method = getnamecallmethod()
+
+        if ((getgenv().ED_AntiKick.CheckCaller and not checkcaller()) or true)
+            and CompareInstances(self, LocalPlayer)
+            and gsub(method, "^%l", string.upper) == "Kick"
+            and getgenv().ED_AntiKick.Enabled then
+
+            if CanCastToSTDString(message) and getgenv().ED_AntiKick.SendNotifications then
+                Notification.new("<Color=Green>Intercepted a Kick attempt!<Color=/>"):Display()
+            end
+            return
+        end
+
+        return OldNamecall(...)
+    end))
+
+    local OldFunction; OldFunction = hookfunction(LocalPlayer.Kick, function(...)
+        local self, message = ...
+
+        if ((getgenv().ED_AntiKick.CheckCaller and not checkcaller()) or true)
+            and CompareInstances(self, LocalPlayer)
+            and getgenv().ED_AntiKick.Enabled then
+
+            if CanCastToSTDString(message) and getgenv().ED_AntiKick.SendNotifications then
+                Notification.new("<Color=Green>Intercepted a Kick attempt!<Color=/>"):Display()
+            end
+            return
+        end
+    end)
+end
+--// ========== End Anti-Kick ==========
+
+
+-- เตือนให้เลือกทีม
 task.spawn(function()
     local shownWarning = false
-
     while player.Team == nil do
         if not shownWarning then
-            Notification.new("<Color=White> Choose Some team for Anti Banned active! <Color=/>"):Display()
+            Notification.new("<Color=White>Choose a team to activate Anti-Banned!<Color=/>"):Display()
             shownWarning = true
         end
         task.wait(1.5)
     end
 
-    -- เมื่อเลือกทีมแล้ว แสดง Notification
-    Notification.new("<Color=White> Inject Script<Color=/> <Color=Red> Bitchh! <Color=/>"):Display()
+    -- หลังเลือกทีม
+    Notification.new("<Color=White>Inject Script<Color=/> <Color=Red>Bitchh!<Color=/>"):Display()
     wait(1)
-    Notification.new("<Color=White> It may take <Color=Yellow>2 - 17<Color=/> seconds.<Color=/>"):Display()
+    Notification.new("<Color=White>It may take <Color=Yellow>2 - 17<Color=/> seconds.<Color=/>"):Display()
     task.wait(2.5)
 
-    -- แสดง Anti Banned Active แบบสุ่มเวลา (2 - 17 วิ)
+    -- ✅ แสดง Notification Anti-Kick ถ้าเปิดใช้งานอยู่
+    if getgenv().ED_AntiKick and getgenv().ED_AntiKick.Enabled then
+            task.wait(3)
+        Notification.new("<Color=Yellow>Anti-Kick protection <Color=Green>Enabled!<Color=/>"):Display()
+    end
+
+    -- Anti-Banned active
     local duration = math.random(2, 17)
-    local notif = Notification.new("<Color=White> Anti Banned from admins <Color=/> <Color=Green>Active! <Color=/>"):Display()
-    notif:Display()
+    Notification.new("<Color=White>Anti Banned from admins <Color=/> <Color=Green>Active!<Color=/>"):Display()
     task.wait(duration)
 end)
 
@@ -51,11 +115,10 @@ local blacklist = {
     ["rip_indra"] = true
 }
 
--- ฟังก์ชันเช็คชื่อผู้เล่น
 local function checkPlayers()
     for _, p in ipairs(Players:GetPlayers()) do
         if blacklist[p.Name] then
-            Notification.new("<Color=Yellow> The Admin " .. p.Name .. " Has Joined the servers!!<Color=/>"):Display()
+            Notification.new("<Color=Yellow>The Admin " .. p.Name .. " has joined the server!!<Color=/>"):Display()
             task.wait(1.9)
             game:Shutdown()
             break
@@ -63,7 +126,6 @@ local function checkPlayers()
     end
 end
 
--- ลูปเช็คชื่อทุก 1.5 วินาที
 task.spawn(function()
     while true do
         checkPlayers()
@@ -71,12 +133,12 @@ task.spawn(function()
     end
 end)
 
-
--- Anti-AFK by Kawnew (Safe + Normal)
+-- Anti-AFK
 local VirtualUser = game:service("VirtualUser")
-game:service("Players").LocalPlayer.Idled:connect(function()
+Players.LocalPlayer.Idled:connect(function()
     VirtualUser:Button2Down(Vector2.new(0,0), workspace.CurrentCamera.CFrame)
     task.wait(1)
     VirtualUser:Button2Up(Vector2.new(0,0), workspace.CurrentCamera.CFrame)
 end)
-warm("Anti AFK Active")
+
+warn("Anti AFK Active")
