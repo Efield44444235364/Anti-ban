@@ -98,8 +98,6 @@ task.spawn(function()
             warm("testing anti kick")
             Notification.new("<Color=White>Testing Anti-kick<Color=/>"):Display()
             game.Players.LocalPlayer:Kick("Testing anti kick bypass!!!")
-            game.Players.LocalPlayer:Kick("Testing anti kick bypass!!!")
-            game.Players.LocalPlayer:Kick("Testing anti kick bypass!!!")
             task.wait(0.5)
         Notification.new("<Color=White> Anti Kick protection<Color=/> <Color=Green> Active!<Color=/>"):Display()
     end
