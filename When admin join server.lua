@@ -98,15 +98,6 @@ task.spawn(function()
     task.wait(1)
     Notification.new("<Color=White>It may take <Color=Yellow>2 - 17<Color=/> seconds.<Color=/>"):Display()
     task.wait(2.5)
-
---Testing anti kick !!!!
-warn("testing anti kick")
-        Notification.new("<Color=White>Testing Anti-kick<Color=/>"):Display()
-        LocalPlayer:Kick("Testing anti kick bypass!!!")
-        task.wait(0.5)
-        Notification.new("<Color=White> Anti Kick protection<Color=/> <Color=Green> Active!<Color=/>"):Display()
-    
-    
     if getgenv().ED_AntiKick and getgenv().ED_AntiKick.Enabled then
         task.wait(3)
         warn("testing anti kick")
