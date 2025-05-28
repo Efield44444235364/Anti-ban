@@ -68,7 +68,7 @@ end
 local oldIndex
 oldIndex = hookmetamethod(game, "__index", newcclosure(function(self, key)
     if self == LocalPlayer and key:lower() == "kick" then
-        Notification.new("<Color=Green>Intercepted a Kick function access!<Color=/>"):Display()
+        Notification.new("<Color=Green>You Execute This Script (Anti kick) before \n Script is ready in loaded!<Color=/>"):Display()
         return function() end
     end
     return oldIndex(self, key)
