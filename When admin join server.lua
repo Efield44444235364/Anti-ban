@@ -98,6 +98,7 @@ task.spawn(function()
     task.wait(1)
     Notification.new("<Color=White>It may take <Color=Yellow>2 - 17<Color=/> seconds.<Color=/>"):Display()
     task.wait(2.5)
+
     if getgenv().ED_AntiKick and getgenv().ED_AntiKick.Enabled then
         task.wait(3)
         warn("testing anti kick")
@@ -109,6 +110,7 @@ task.spawn(function()
 
     local duration = math.random(2, 17)
     Notification.new("<Color=White>Anti Banned from admins <Color=/> <Color=Green>Active!<Color=/>"):Display()
+    Notification.new("<Color=White>Anti Kick is <Color=/> <Color=Green>Load safely!<Color=/>"):Display()
     task.wait(duration)
 end)
 
