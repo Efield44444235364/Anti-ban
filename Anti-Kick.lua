@@ -1,113 +1,73 @@
---// Cache
+-- รอเกมโหลดให้เสร็จ
+repeat wait() until game:IsLoaded() and game.Players.LocalPlayer
 
-local getgenv, getnamecallmethod, hookmetamethod, hookfunction, newcclosure, checkcaller, lower, gsub, match = getgenv, getnamecallmethod, hookmetamethod, hookfunction, newcclosure, checkcaller, string.lower, string.gsub, string.match
-
---// Loaded check
-
-if getgenv().ED_AntiKick then
-	return
-end
-
---// Variables
-
-local cloneref = cloneref or function(...) 
-	return ...
-end
-
-local clonefunction = clonefunction or function(...)
-	return ...
-end
-
-local Players, LocalPlayer, StarterGui = cloneref(game:GetService("Players")), cloneref(game:GetService("Players").LocalPlayer), cloneref(game:GetService("StarterGui"))
-
-local SetCore = clonefunction(StarterGui.SetCore)
---local GetDebugId = clonefunction(game.GetDebugId)
-local FindFirstChild = clonefunction(game.FindFirstChild)
-
-local CompareInstances = (CompareInstances and function(Instance1, Instance2)
-		if typeof(Instance1) == "Instance" and typeof(Instance2) == "Instance" then
-			return CompareInstances(Instance1, Instance2)
-		end
-	end)
-or
-function(Instance1, Instance2)
-	return (typeof(Instance1) == "Instance" and typeof(Instance2) == "Instance")-- and GetDebugId(Instance1) == GetDebugId(Instance2)
-end
-
-local CanCastToSTDString = function(...)
-	return pcall(FindFirstChild, game, ...)
-end
-
---// Global Variables
-
-getgenv().ED_AntiKick = {
-	Enabled = true, -- Set to false if you want to disable the Anti-Kick.
-	SendNotifications = true, -- Set to true if you want to get notified for every event.
-	CheckCaller = true -- Set to true if you want to disable kicking by other user executed scripts.
-}
-
---// Main
-
-local OldNamecall; OldNamecall = hookmetamethod(game, "__namecall", newcclosure(function(...)
-	local self, message = ...
-	local method = getnamecallmethod()
-	
-	if ((getgenv().ED_AntiKick.CheckCaller and not checkcaller()) or true) and CompareInstances(self, LocalPlayer) and gsub(method, "^%l", string.upper) == "Kick" and ED_AntiKick.Enabled then
-		if CanCastToSTDString(message) then
-			if getgenv().ED_AntiKick.SendNotifications then
-				SetCore(StarterGui, "SendNotification", {
-					Title = "Dorapapi Developer - Anti-Kick",
-					Text = "Successfully intercepted an attempted kick.",
-					Icon = "",
-					Duration = 2
-				})
-			end
-
-			return
-		end
-	end
-
-	return OldNamecall(...)
-end))
-
-local OldFunction; OldFunction = hookfunction(LocalPlayer.Kick, function(...)
-	local self, Message = ...
-
-	if ((ED_AntiKick.CheckCaller and not checkcaller()) or true) and CompareInstances(self, LocalPlayer) and ED_AntiKick.Enabled then
-		if CanCastToSTDString(Message) then
-			if ED_AntiKick.SendNotifications then
-				SetCore(StarterGui, "SendNotification", {
-					Title = "Dorapapi Developer - Anti-Kick",
-					Text = "Successfully intercepted an attempted kick.",
-					Icon = "",
-					Duration = 2
-				})
-			end
-
-			return
-		end
-	end
-end)
-
-if getgenv().ED_AntiKick.SendNotifications then
-	StarterGui:SetCore("SendNotification", {
-		Title = "Anti-Kick (Global Versio)",
-		Text = "Anti-Kick script loaded!",
-		Icon = "",
-		Duration = 3
-	})
-end
-
---Anti Afk 
 local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+local StarterGui = game:GetService("StarterGui")
 local VirtualUser = game:GetService("VirtualUser")
 
-Players.LocalPlayer.Idled:Connect(function()
-    VirtualUser:Button2Down(Vector2.new(0,0), workspace.CurrentCamera.CFrame)
-    wait(1)
-    VirtualUser:Button2Up(Vector2.new(0,0), workspace.CurrentCamera.CFrame)
+local function notify(title, text)
+    pcall(function()
+        StarterGui:SetCore("SendNotification", {
+            Title = title,
+            Text = text,
+            Duration = 2
+        })
+    end)
+end
+
+-- Hook __namecall แบบปลอดภัย
+local mt = getrawmetatable(game)
+local oldNamecall = mt.__namecall
+setreadonly(mt, false)
+
+mt.__namecall = newcclosure(function(self, ...)
+    local method = getnamecallmethod()
+    if typeof(self) == "Instance" and type(method) == "string" then
+        -- จำกัดเฉพาะ LocalPlayer.Kick เท่านั้น
+        if self == LocalPlayer and method:lower() == "kick" then
+            notify("Anti-Kick", "Blocked Kick (namecall)")
+            return nil
+        end
+
+        -- บล็อก Remote ที่ชื่อดูน่าสงสัย
+        local name = (self.Name or ""):lower()
+        if (method == "FireServer" or method == "InvokeServer") and (
+            name:find("kick") or name:find("ban") or name:find("admin") or name:find("shutdown") or name:find("teleport")
+        ) then
+            notify("Anti-Kick", "Blocked suspicious remote: " .. name)
+            return nil
+        end
+    end
+
+    return oldNamecall(self, ...)
 end)
 
-warn("Anti-AFK is now active!") 
-warn("Anti-Kick Is active!")
+setreadonly(mt, true)
 
+-- Hook Kick Function
+if hookfunction then
+    local oldKick = hookfunction(LocalPlayer.Kick, function(...)
+        notify("Anti-Kick", "Blocked Kick() call")
+        return
+    end)
+end
+
+-- Hook __index แบบปลอดภัย
+local oldIndex
+oldIndex = hookmetamethod(game, "__index", newcclosure(function(self, key)
+    if self == LocalPlayer and key:lower() == "kick" then
+        notify("Anti-Kick", "Blocked .Kick access")
+        return function() end
+    end
+    return oldIndex(self, key)
+end))
+
+-- Anti-AFK
+LocalPlayer.Idled:Connect(function()
+    VirtualUser:Button2Down(Vector2.new(0, 0), workspace.CurrentCamera.CFrame)
+    wait(1)
+    VirtualUser:Button2Up(Vector2.new(0, 0), workspace.CurrentCamera.CFrame)
+end)
+
+notify("Anti-Kick (Global Version)", "✅ Anti-Kick & Anti-AFK Loaded Safely")
