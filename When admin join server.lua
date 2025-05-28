@@ -6,6 +6,13 @@ local allowedPlaces = {
 
 if not allowedPlaces[game.PlaceId] then
     warn("Anti Banned not active!")
+    local StarterGui = game:GetService("StarterGui")
+StarterGui:SetCore("SendNotification", {
+    Title = "Anti-Ban Not Active",
+    Text = "For Blox fruit only!!",
+    Icon = "", -- ไอคอนตามต้องการ
+    Duration = 5
+})
     return
 end
 
@@ -142,3 +149,6 @@ Players.LocalPlayer.Idled:connect(function()
 end)
 
 warn("Anti AFK Active")
+
+warm("Blacklist : mygame43, Uzoth, xonae, Onett, Uzi_London, rip_indra, ShafiDev")
+warm("It Active")
