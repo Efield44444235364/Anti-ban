@@ -95,7 +95,7 @@ task.wait(2.5)
 -- ✅ แสดง Notification Anti-Kick ถ้าเปิดใช้งานอยู่  
 if getgenv().ED_AntiKick and getgenv().ED_AntiKick.Enabled then  
         task.wait(3)  
-        warm("testing anti kick")  
+        warn("testing anti kick")  
         Notification.new("<Color=White>Testing Anti-kick<Color=/>"):Display()  
         game.Players.LocalPlayer:Kick("Testing anti kick bypass!!!")  
         task.wait(0.5)  
