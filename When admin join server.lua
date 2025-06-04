@@ -1,5 +1,13 @@
+if not _G.efield_loader then
+    game.Players.LocalPlayer:Kick("This is a fucking old script pls get new from Dev!!!!. End of story🥰🫶🏻")
+    wait(2)
+    game.Players.LocalPlayer:Kick("game:Shutdown()!! ")
+    game:Shutdown()
+    return
+end
 
-local allowedPlaces = {
+
+local allowedPlaces
 [2753915549] = true,
 [7449423635] = true,
 [4442272183] = true
