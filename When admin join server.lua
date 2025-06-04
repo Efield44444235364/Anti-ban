@@ -6,7 +6,7 @@ if not _G.efield_loader then
 end
 
 
-local allowedPlaces
+local allowedPlaces {
 [2753915549] = true,
 [7449423635] = true,
 [4442272183] = true
