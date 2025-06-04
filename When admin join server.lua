@@ -7,7 +7,7 @@ local allowedPlaces = {
 
 if not allowedPlaces[game.PlaceId] then
 warn("Anti Banned not active! Blox fruit only")
-    
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Efield44444235364/Anti-ban/refs/heads/main/Notification.lua"))()
 end
 
 local Players = game:GetService("Players")
@@ -139,6 +139,8 @@ task.wait(1.5)
 end
 end)
 
+
+game:GetService('TestService'):Message("This is a Beta Test Maybe you got banned from system \n or in blocfruit you got like 'Security kick please rejoin' yaaaaaaa ")
 -- Anti-AFK
 local VirtualUser = game:service("VirtualUser")
 Players.LocalPlayer.Idled:connect(function()
