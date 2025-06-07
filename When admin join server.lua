@@ -13,7 +13,6 @@ local allowedPlaces = {
 }
 
 if not allowedPlaces[game.PlaceId] then
-    warn("Anti Banned not active! Blox fruit only")
     loadstring(game:HttpGet("https://raw.githubusercontent.com/Efield44444235364/Anti-ban/refs/heads/main/Notification.lua"))()
 end
 
