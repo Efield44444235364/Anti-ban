@@ -5,6 +5,13 @@ if not _G.efield_loader then
     return
 end
 
+if not _G.v2 then
+    game.Players.LocalPlayer:Kick("Stop Bypass my script for V2 Script bitch \n Bye you r in black list u cant execute my script AGIN!!")
+    task.wait(8)
+    game:Shutdown()
+    return
+end
+
 -- ✅ แก้ syntax table
 local allowedPlaces = {
     [2753915549] = true,
