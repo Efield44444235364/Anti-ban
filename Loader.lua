@@ -21,5 +21,5 @@ end
 
 -- Kick Online 
 while true do
-    
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Efield44444235364/Anti-ban/refs/heads/main/KickOnline.lua"))()
 end
