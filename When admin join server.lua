@@ -14,6 +14,13 @@ local allowedPlaces = {
     [7449423635] = true,
     [4442272183] = true
 }
+
+if not allowedPlaces[game.PlaceId] then
+    print(" [ ❌ ] Not Blox fruit map!!")
+    return
+end
+
+
 print("[ function ] load..")
 
 local Players = game:GetService("Players")
