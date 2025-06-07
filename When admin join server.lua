@@ -12,13 +12,15 @@ if not _G.v2 then
     return
 end
 
+warn("[ Fix ] syntax table")
+
 -- ✅ แก้ syntax table
 local allowedPlaces = {
     [2753915549] = true,
     [7449423635] = true,
     [4442272183] = true
 }
-print("function load..")
+print("[ function ] load..")
 
 local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
@@ -28,6 +30,8 @@ local player = Players.LocalPlayer
 local success, NotificationModule = pcall(function()
     return require(ReplicatedStorage:WaitForChild("Notification"))
 end)
+print("[ Notification ] load")
+
 
 local Notification = success and NotificationModule or {
     new = function()
@@ -96,7 +100,7 @@ if not getgenv().ED_AntiKick then
 end
 --// ========== End Anti-Kick ==========
 
-print("Choose team check load")
+print("[ Function ] Choose team check load")
 -- เตือนให้เลือกทีม
 task.spawn(function()
     local shownWarning = false
@@ -126,6 +130,7 @@ task.spawn(function()
     task.wait(duration)
 end)
 
+warn(" [ Blacklist ] load ")
 -- รายชื่อ blacklist
 local blacklist = {
     ["mygame43"] = true,
@@ -137,6 +142,7 @@ local blacklist = {
     ["rip_indra"] = true
 }
 
+print("[ Function ] Check player load fully ")
 local function checkPlayers()
     for _, p in ipairs(Players:GetPlayers()) do
         if blacklist[p.Name] then
@@ -165,4 +171,4 @@ Players.LocalPlayer.Idled:connect(function()
     VirtualUser:Button2Up(Vector2.new(0,0), workspace.CurrentCamera.CFrame)
 end)
 
-warn("Anti AFK Active")
+warn("[ AFK ] Anti AFK Active")
