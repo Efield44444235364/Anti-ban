@@ -24,7 +24,7 @@ local player = Players.LocalPlayer
 local success, NotificationModule = pcall(function()
     return require(ReplicatedStorage:WaitForChild("Notification"))
 end)
-print("[ Notification ] load")
+print("[ Function ] Notification load")
 
 
 local Notification = success and NotificationModule or {
@@ -34,7 +34,7 @@ local Notification = success and NotificationModule or {
         }
     end
 }
-print("notification load")
+
 --// ========== Anti-Kick ==========
 if not getgenv().ED_AntiKick then
     local getgenv, getnamecallmethod, hookmetamethod, hookfunction, newcclosure, checkcaller, gsub =
