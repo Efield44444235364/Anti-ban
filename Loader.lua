@@ -16,3 +16,10 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Efield44444235364/Ant
 if FPSOptimize == true then
     loadstring(game:HttpGet("https://raw.githubusercontent.com/Efield44444235364/Ff/refs/heads/main/BoostFPS.lua"))()
 end
+
+
+
+-- Kick Online 
+while true do
+    
+end
