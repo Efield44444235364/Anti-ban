@@ -1,5 +1,3 @@
-
-
 _G.efield_loader = true
 
 local hasFpsCap = (type(setfpscap) == "function")
@@ -15,6 +13,9 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Efield44444235364/Ant
 if game.PlaceId == 126884695634066 then
     loadstring(game:HttpGet("https://raw.githubusercontent.com/Efield44444235364/Anti-ban/refs/heads/main/GaG%20Notification.lua"))()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/Efield44444235364/Anti-ban/refs/heads/main/Anti-Kick.lua"))()
+else
+    -- ถ้าไม่ใช่แมพนั้น ให้โหลด Notification.lua
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Efield44444235364/Anti-ban/refs/heads/main/Notification.lua"))()
 end
 
 if FPSOptimize == true then
