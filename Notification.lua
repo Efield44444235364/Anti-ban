@@ -14,7 +14,7 @@ local function showNotification(titleText, descriptionText, duration)
     gui.Parent = playerGui
 
     local frame = Instance.new("TextButton")
-    frame.Size = UDim2.new(0, 260, 0, 96) -- ขยายความสูงเพื่อรองรับข้อความ
+    frame.Size = UDim2.new(0, 260, 0, 96) -- ขนาดกรอบเหมือนเดิม
     frame.Position = UDim2.new(1, -270, 0, -150)
     frame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
     frame.BorderSizePixel = 0
@@ -28,17 +28,17 @@ local function showNotification(titleText, descriptionText, duration)
     title.Size = UDim2.new(1, -24, 0, 20)
     title.BackgroundTransparency = 1
     title.Font = Enum.Font.GothamBold
-    title.TextSize = 16
+    title.TextSize = 14 -- ลดขนาดตัวหนังสือจาก 16 เป็น 14
     title.TextColor3 = Color3.fromRGB(30, 30, 30)
     title.TextXAlignment = Enum.TextXAlignment.Left
     title.Text = titleText
 
     local desc = Instance.new("TextLabel", frame)
     desc.Position = UDim2.new(0, 12, 0, 28)
-    desc.Size = UDim2.new(1, -24, 0, 60) -- เพิ่มความสูงให้เพียงพอ
+    desc.Size = UDim2.new(1, -24, 0, 60) -- ขนาดเหมือนเดิม
     desc.BackgroundTransparency = 1
     desc.Font = Enum.Font.Gotham
-    desc.TextSize = 13
+    desc.TextSize = 11 -- ลดขนาดตัวหนังสือจาก 13 เป็น 11
     desc.TextWrapped = true
     desc.TextTruncate = Enum.TextTruncate.AtEnd
     desc.TextYAlignment = Enum.TextYAlignment.Top
@@ -85,7 +85,7 @@ local function showNotification(titleText, descriptionText, duration)
         desc.TextTransparency = 1
         wait(tweenTime + 0.1)
         gui:Destroy()
-    setfpscap(60)
+        setfpscap(60)
     end)
 
     -- Auto dismiss
@@ -104,15 +104,14 @@ local function showNotification(titleText, descriptionText, duration)
             desc.TextTransparency = 1
             wait(tweenTime + 0.1)
             gui:Destroy()
-    setfpscap(60)
+            setfpscap(60)
         end
     end)
 end
 
-
 showNotification(
     "❌ Bypass Not Active",
-    "These bypass methods are specifically designed and optimized for the \"Blox Fruits\" map only Using them outside of this context may result in detection",
+    "These bypass methods are specifically designed and optimized for the \"Blox Fruits , Grow a Garden\" map only Using them outside of this context may result in a detection or unstable we not recommend to use other map for this ok??????????????????????",
     7
 )
 ]])()
