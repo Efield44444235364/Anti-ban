@@ -11,10 +11,7 @@ local allowedPlaces = {
     [7449423635] = true,
     [4442272183] = true
 }
-
-if not allowedPlaces[game.PlaceId] then
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/Efield44444235364/Anti-ban/refs/heads/main/Notification.lua"))()
-end
+print("function load..")
 
 local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
@@ -32,7 +29,7 @@ local Notification = success and NotificationModule or {
         }
     end
 }
-
+print("notification load")
 --// ========== Anti-Kick ==========
 if not getgenv().ED_AntiKick then
     local getgenv, getnamecallmethod, hookmetamethod, hookfunction, newcclosure, checkcaller, gsub =
@@ -92,20 +89,20 @@ if not getgenv().ED_AntiKick then
 end
 --// ========== End Anti-Kick ==========
 
+print("Choose team check load")
 -- เตือนให้เลือกทีม
 task.spawn(function()
     local shownWarning = false
     while player.Team == nil do
         if not shownWarning then
-            Notification.new("<Color=White>Choose a team to activate Anti-Banned!<Color=/>"):Display()
+            Notification.new("<Color=White>Choose a team to activate Anti-Kick!<Color=/>"):Display()
             shownWarning = true
         end
         task.wait(1.5)
     end
 
-    Notification.new("<Color=White>Inject Script<Color=/> <Color=Red>Bitchh!<Color=/>"):Display()
-    wait(1)
-    Notification.new("<Color=White>It may take <Color=Yellow>2 - 17<Color=/> seconds.<Color=/>"):Display()
+    Notification.new("<Color=White><Color=/>"):Display()
+    Notification.new("<Color=White> Loading script...<Color=/>"):Display()
     task.wait(2.5)
 
     if getgenv().ED_AntiKick and getgenv().ED_AntiKick.Enabled then
@@ -162,4 +159,3 @@ Players.LocalPlayer.Idled:connect(function()
 end)
 
 warn("Anti AFK Active")
-warn("Anti Kick load safely")
