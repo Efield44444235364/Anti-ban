@@ -1,7 +1,7 @@
 
 
 _G.efield_loader = true
-
+_G.v2 = true
 local hasFpsCap = (type(setfpscap) == "function")
 
 if not hasFpsCap then
