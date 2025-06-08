@@ -5,7 +5,7 @@ local TweenService = game:GetService("TweenService")
 local playerGui = Players.LocalPlayer:WaitForChild("PlayerGui")
 
 local function showNotification(titleText, descriptionText, duration)
-    duration = duration or 6
+    duration = duration or 999
 
     local gui = Instance.new("ScreenGui")  
     gui.Name = "TouchDismissNotification"  
