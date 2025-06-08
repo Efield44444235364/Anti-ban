@@ -111,7 +111,7 @@ end
 
 showNotification(
     "✅ Grow a Garden Bypass",
-    "Module has been fully optimized for this experience. Most kick vectors are suppressed (~80% success rate). Some risk remains  play cautiously 🌵🌱",
+    "Module has been fully optimized for this experience. Most Ban from roblox are suppressed (~80% success rate). Some risk remains  play cautiously 🌵🌱",
     7
 )
 
