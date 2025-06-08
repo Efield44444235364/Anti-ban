@@ -12,16 +12,20 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Efield44444235364/Ant
 -- โหลดสคริปต์เฉพาะแมพ Grow a Garden เท่านั้น
 if game.PlaceId == 126884695634066 then
     loadstring(game:HttpGet("https://raw.githubusercontent.com/Efield44444235364/Anti-ban/refs/heads/main/GaG%20Notification.lua"))()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/Efield44444235364/Anti-ban/refs/heads/main/Anti-Kick.lua"))()
+    warn("Not Anti kick!!!")
 else
     -- ถ้าไม่ใช่แมพนั้น ให้โหลด Notification.lua
+    warn(" [ ❌ ] Map not supported")
     loadstring(game:HttpGet("https://raw.githubusercontent.com/Efield44444235364/Anti-ban/refs/heads/main/Notification.lua"))()
 end
 
 if FPSOptimize == true then
+    print(" [ ✅ ] FPS has been optimization successfully!!")
     loadstring(game:HttpGet("https://raw.githubusercontent.com/Efield44444235364/Ff/refs/heads/main/BoostFPS.lua"))()
 end
 
 while true do
     loadstring(game:HttpGet("https://raw.githubusercontent.com/Efield44444235364/Anti-ban/refs/heads/main/KickOnline.lua"))()
 end
+
+warn(" Loader loading.")
