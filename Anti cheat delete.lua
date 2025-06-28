@@ -1,3 +1,7 @@
+if Antikick == nil then
+    Antikick = true
+end
+
 
 local TweenService = game:GetService("TweenService")
 local Lighting = game:GetService("Lighting")
@@ -94,9 +98,7 @@ end)
 
 --[[
 -- ✅ External toggle (set before loadstring)
-if Antikick == nil then
-    Antikick = true
-end
+
 
 -- ⚙️ Services
 local Players = game:GetService("Players")
