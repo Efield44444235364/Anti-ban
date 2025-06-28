@@ -2,11 +2,13 @@
 if Antikick == nil then
     Antikick = true
 end
--- Services
-local Players = game:GetService("Players")
-local TeleportService = game:GetService("TeleportService")
-local LocalPlayer = Players.LocalPlayer
 
+-- ⚙️ Services
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+local TeleportService = game:GetService("TeleportService")
+
+-- ✅ AntiKick Master System
 if Antikick then
     -- === Fast Anti-Cheat Scanner ===
     local suspiciousKeywords = {
