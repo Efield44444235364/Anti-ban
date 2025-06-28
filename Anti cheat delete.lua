@@ -1,6 +1,7 @@
 -- ✅ External toggle (set before loadstring)
-Antikick = (Antikick == nil) and true or Antikick
-
+if Antikick == nil then
+    Antikick = true
+end
 -- Services
 local Players = game:GetService("Players")
 local TeleportService = game:GetService("TeleportService")
