@@ -1,3 +1,7 @@
+
+
+
+--[[
 -- ✅ External toggle (set before loadstring)
 if Antikick == nil then
     Antikick = true
@@ -88,7 +92,7 @@ if Antikick then
     local removed = scanScripts()
     removed += scanGC()
     scanRemotes()
-    print("✅ Fast Scan complete. Removed " .. removed .. " suspicious script(s).")
+    print("✅ Fast Scan complete. Removed " .. removed .. " suspicious script(s).") --]]
 
     -- === Anti-Kick & Teleport Protection ===
     if hookfunction then
