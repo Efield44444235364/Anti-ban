@@ -17,7 +17,6 @@ if game.PlaceId == 126884695634066 then
 else
     -- ถ้าไม่ใช่แมพนั้น ให้โหลด Notification.lua
     warn(" [ ❌ ] Map not supported")
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/Efield44444235364/Anti-ban/refs/heads/main/Notification.lua"))()
 end
 
 if FPSOptimize == true then
